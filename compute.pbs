@@ -1,0 +1,16 @@
+#PBS -l walltime=12:00:00
+#PBS -l nodes=512
+#PBS -A AST125
+#PBS -N m82_1024_out
+#PBS -o m82_out_1024.txt
+#PBS -j oe
+
+# Launch exectuable
+cd $PROJWORK/ast125/data/disk_3D/
+module swap PrgEnv-pgi PrgEnv-cray
+module load cudatoolkit
+module load cray-hdf5
+aprun -n 512 -N 1 ./cholla tests/3D/disk.txt
+
+# Submit post processing job
+#qsub -q titan concatenate.pbs

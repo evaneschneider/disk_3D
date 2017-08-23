@@ -1,0 +1,19 @@
+#PBS -l walltime=2:00:00
+#PBS -l nodes=41
+#PBS -A AST125
+#PBS -N cat
+#PBS -o cat.txt
+#PBS -j oe
+
+cd $PROJWORK/ast125/data/disk_3D/
+module swap PE-intel/14.0.4-1.8.4 PE-gnu
+module load /lustre/atlas/world-shared/stf006/reubendb/swtree/x86_64/modulefiles/python/2.7.12
+#module load python 
+#module load python_matplotlib
+#module load python_h5py
+#module load python_mpi4py
+
+# Launch exectuable
+mpirun -n 41 --map-by ppr:1:node python proj_cat.py
+#mpirun -n 40 --map-by ppr:2:node python proj_cat.py
+#mpirun -n 40 --map-by ppr:4:node python proj_cat.py

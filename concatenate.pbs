@@ -1,0 +1,20 @@
+#PBS -l walltime=2:00:00
+#PBS -l nodes=10
+#PBS -A AST125
+#PBS -N cat
+#PBS -o cat.txt
+#PBS -j oe
+
+cd $PROJWORK/ast125/data/disk_3D/
+module swap PrgEnv-pgi PrgEnv-gnu
+module load python 
+module load python_numpy/1.9.2
+module load python_matplotlib
+module load python_h5py
+module load python_mpi4py
+
+# Launch exectuable
+#mpirun -n 20 --map-by ppr:1:node python dset_cat_3D.py
+#aprun -n 41 -N 2 python dset_cat_3D.py
+#aprun -n 41 -N 1 python proj_cat.py
+aprun -n 20 -N 2 python dset_cat_3D.py

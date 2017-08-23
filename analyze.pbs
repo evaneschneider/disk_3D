@@ -1,0 +1,18 @@
+#PBS -l walltime=2:00:00
+#PBS -l nodes=1
+#PBS -A AST125
+#PBS -N plots 
+#PBS -o plots.txt
+#PBS -j oe
+
+cd /lustre/atlas/proj-shared/ast125/data/disk_3D/
+module swap PE-intel PE-gnu
+module load python
+module load python_numpy 
+module load python_matplotlib
+module load python_h5py
+module load python_scipy
+module load python_mpi4py
+
+# Launch exectuables
+python plot_disk.py
